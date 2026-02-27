@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int main() {
+    int N;
+    scanf("%d", &N);
+
+    int arr[N];
+    int i = 0;
+
+    while(i < N) {
+        scanf("%d", &arr[i]);
+        i++;
+    }
+
+    int totalDrops = 0;
+    int consecutiveDrops = 0;
+    int crashDay = -1;
+
+    i = 1;
+    while(i < N) {
+        if(arr[i] < arr[i - 1]) {
+            totalDrops++;
+            consecutiveDrops++;
+
+            if(consecutiveDrops == 3 && crashDay == -1) {
+                crashDay = i + 1;              }
+        } else {
+            consecutiveDrops = 0;
+        }
+        i++;
+    }
+
+    if(crashDay != -1)
+        printf("Crash Day: %d\n", crashDay);
+    else
+        printf("Crash Day: Not Detected\n");
+
+    printf("Total Drops: %d\n", totalDrops);
+
+    return 0;
+}
